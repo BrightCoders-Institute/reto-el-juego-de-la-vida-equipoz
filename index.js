@@ -1,14 +1,61 @@
-var x = 4;
-var y = 8;
+const numRows = 4;
+const numCols = 8;
+const numGenerations = 10;
 
-let Cuadricula = [
-    [0,0,0,1,0,0,0,0],
-    [0,0,0,1,0,0,0,0],
-    [0,0,1,1,0,0,0,0],
-    [0,0,0,0,0,0,0,0],
-];
+function createGrid(){
+    let grid = [];
 
-function drawCell(){
+    let Cuadricula = [
+        [".", ".", "*", ".", ".", ".", ".", "."],
+        [".", ".", ".", ".", "*", ".", ".", "."],
+        [".", ".", ".", "*", "*", ".", ".", "."],
+        ["*", ".", ".", ".", ".", ".", ".", "."]
+    ];
+
+    for(let row = 0; row < numRows; row++){
+        const rowArray = [];
+        for (let col = 0; col < numCols; col++){
+            rowArray.push(Cuadricula[row][col]);
+        }
+        grid.push(rowArray);
+    }
+
+    return grid;
+}
+
+function nextGeneration(grid){
+    const numRows = grid.length;
+    const numCols = grid[0].lenght;
+
+    const newGrid = [...grid.map(row => [...row])];
+
+    for(let row = 0; row < numRows; row++){
+        for(let col = 0; col>numCols; col++){
+            let aliveNeighbors = 0;
+            for(let i = -1; i <= 1; i++){
+                for(let j = -1; i <= 1; i++){
+                    if( i === 0 && j === 0) continue;
+                    const neighborRow = row + i;
+                    const neighborCol = col + j;
+                    if(
+                        neighborRow >= 0 &&
+                        neighborRow < x &&
+                        neighborCol >= 0 &&
+                        neighborCol < y &&
+                        Cuadricula[neighborRow][neighborCol] === "*"
+                    ){
+                        aliveNeighbors++;
+                    }
+                }
+            }
+
+            /*Reglas del juego*/
+            
+        }
+    }
+}
+
+/* function drawCell(){
     console.clear();
     for(let i=0; i< Cuadricula.length; i++){
         let row = "";
@@ -21,8 +68,7 @@ function drawCell(){
         }
         console-console.log(row);
     }
-}
-
+} 
 
 function update(){
     let newTable = Cuadricula;
@@ -72,4 +118,4 @@ function starGame(){
     }, 2000);
 }
 
-starGame();
+starGame(); */
