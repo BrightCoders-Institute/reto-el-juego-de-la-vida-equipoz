@@ -3,13 +3,13 @@ const numCols = 8;
 const numGenerations = 10;
 
 function createGrid(){
-    let grid = [];
+    const grid = [];
 
-    let Cuadricula = [
-        [".", ".", "*", ".", ".", ".", ".", "."],
+    const Cuadricula = [
+        [".", ".", ".", ".", ".", ".", ".", "."],
         [".", ".", ".", ".", "*", ".", ".", "."],
         [".", ".", ".", "*", "*", ".", ".", "."],
-        ["*", ".", ".", ".", ".", ".", ".", "."]
+        [".", ".", ".", ".", ".", ".", ".", "."]
     ];
 
     for(let row = 0; row < numRows; row++){
@@ -30,7 +30,7 @@ function nextGeneration(grid){
     const newGrid = [...grid.map(row => [...row])];
 
     for(let row = 0; row < numRows; row++){
-        for(let col = 0; col>numCols; col++){
+        for(let col = 0; col<numCols; col++){
             let aliveNeighbors = 0;
             for(let i = -1; i <= 1; i++){
                 for(let j = -1; i <= 1; i++){
@@ -39,9 +39,9 @@ function nextGeneration(grid){
                     const neighborCol = col + j;
                     if(
                         neighborRow >= 0 &&
-                        neighborRow < x &&
+                        neighborRow < numRows &&
                         neighborCol >= 0 &&
-                        neighborCol < y &&
+                        neighborCol < numCols &&
                         Cuadricula[neighborRow][neighborCol] === "*"
                     ){
                         aliveNeighbors++;
@@ -50,11 +50,27 @@ function nextGeneration(grid){
             }
 
             /*Reglas del juego*/
-            
+            if(grid[row][col] === "*" && (aliveNeighbors<2 || aliveNeighbors>3)){
+                newGrid[row][col] = ".";
+            }else if(grid[row][col] === "." && aliveNeighbors === 3 ){
+                newGrid[row][col] = "*";
+            }
         }
     }
+    return newGrid;
 }
 
+let grid = createGrid();
+console.log("Generacion 1: ");
+console.log(grid.map(row => row.join("")).join("\n"));
+
+for(let generation = 2; generation<=numGenerations; generation++){
+    grid = nextGeneration(grid);
+    console.log(`\nGeneración ${generation}:`);
+    console.log(grid.map(row => row.join("")).join("\n"));
+
+
+}
 /* function drawCell(){
     console.clear();
     for(let i=0; i< Cuadricula.length; i++){
