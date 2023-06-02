@@ -10,10 +10,10 @@ class GameOfLife {
     const grid = []
 
     const pattern = [
-      ['*', '.', '.', '.', '.', '.', '*', '.'],
-      ['.', '*', '*', '.', '*', '.', '.', '*'],
-      ['.', '.', '.', '*', '*', '.', '*', '.'],
-      ['.', '*', '.', '.', '.', '.', '.', '.']
+      ['.', '.', '.', '.', '.', '.', '.', '.'],
+      ['.', '.', '.', '.', '*', '.', '.', '.'],
+      ['.', '.', '.', '*', '*', '.', '.', '.'],
+      ['.', '.', '.', '.', '.', '.', '.', '.']
     ]
 
     for (let row = 0; row < this.numRows; row++) {
@@ -74,7 +74,8 @@ class GameOfLife {
 
 const numRows = 4
 const numCols = 8
-const numGenerations = 8
+const numGenerations = 2
 
 const game = new GameOfLife(numRows, numCols, numGenerations)
 game.run()
+module.exports = GameOfLife
