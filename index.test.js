@@ -34,4 +34,26 @@ describe('GameOfLife', () => {
 
     expect(game.grid).toEqual(expectedGrid)
   })
+
+  test('should update a live cell to dead if it has less than 2 or more than 3 live neighbors', () => {
+    const game = new GameOfLife(4, 8, 1)
+    game.grid[1][1] = '*'
+    game.grid[1][2] = '.'
+    game.grid[2][1] = '.'
+    game.grid[2][2] = '.'
+    game.nextGeneration()
+    expect(game.grid[1][1]).toBe('.')
+  })
+
+  test('should update a dead cell to live if it has exactly 3 live neighbors', () => {
+    const game = new GameOfLife(4, 8, 1)
+    game.grid[1][1] = '.'
+    game.grid[1][2] = '*'
+    game.grid[1][3] = '.'
+    game.grid[2][1] = '*'
+    game.grid[2][2] = '.'
+    game.grid[2][3] = '*'
+    game.nextGeneration()
+    expect(game.grid[2][2]).toBe('*')
+  })
 })
