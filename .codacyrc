@@ -1,0 +1,8 @@
+{
+  "files": {
+    "excludePatterns": [
+      "node_modules/**",
+      "README*"
+    ]
+  }
+}
