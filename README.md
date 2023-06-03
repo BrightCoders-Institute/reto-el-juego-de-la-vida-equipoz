@@ -33,13 +33,6 @@ Feel free to experiment with different patterns and configurations to observe th
 - [Eduardoespl](eduardoesp3317@gmail.com)
 
 ## Badges
-
-
-- Title or Project Name
-- Table of contents
-- Description. A brief description of what the project is about
-- How to Install and Run the Project.
-- How to Use the Project.
-- Credits
-- Badges
-  
+# Qualification with Codacy
+![Codacy Badge](img/codacy.png)
+![CodeClimate Badge](img/codeclimate.png)
