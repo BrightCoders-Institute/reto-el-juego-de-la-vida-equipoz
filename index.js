@@ -15,7 +15,6 @@ class GameOfLife {
       ['.', '.', '.', '*', '*', '.', '.', '.'],
       ['.', '.', '.', '.', '.', '.', '.', '.']
     ]
-
     for (let row = 0; row < this.numRows; row++) {
       const rowArray = []
       for (let col = 0; col < this.numCols; col++) {
@@ -23,42 +22,42 @@ class GameOfLife {
       }
       grid.push(rowArray)
     }
-
     return grid
   }
 
   nextGeneration () {
     const newGrid = [...this.grid.map(row => [...row])]
-
     for (let row = 0; row < this.numRows; row++) {
       for (let col = 0; col < this.numCols; col++) {
-        let aliveNeighbors = 0
-
-        for (let i = -1; i <= 1; i++) {
-          for (let j = -1; j <= 1; j++) {
-            if (i === 0 && j === 0) continue
-
-            const neighborRow = row + i
-            const neighborCol = col + j
-
-            if (
-              neighborRow >= 0 &&
-              neighborRow < this.numRows &&
-              neighborCol >= 0 &&
-              neighborCol < this.numCols &&
-              this.grid[neighborRow][neighborCol] === '*'
-            ) {
-              aliveNeighbors++
-            }
-          }
-        }
-        if (this.grid[row][col] === '*' && (aliveNeighbors < 2 || aliveNeighbors > 3)) {
+        const aliveNeighbors = this.countAliveNeighbors(row, col)
+        const cell = this.grid[row][col]
+        if (cell === '*' && (aliveNeighbors < 2 || aliveNeighbors > 3)) {
           newGrid[row][col] = '.'
-        } else if (this.grid[row][col] === '.' && aliveNeighbors === 3) {
+        } else if (cell === '.' && aliveNeighbors === 3) {
           newGrid[row][col] = '*'
         }
       }
-    } this.grid = newGrid
+    }
+    this.grid = newGrid
+  }
+
+  countAliveNeighbors (row, col) {
+    let aliveNeighbors = 0
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        if (i === 0 && j === 0) continue
+        const neighborRow = row + i
+        const neighborCol = col + j
+        if (this.isInGrid(neighborRow, neighborCol) && this.grid[neighborRow][neighborCol] === '*') {
+          aliveNeighbors++
+        }
+      }
+    }
+    return aliveNeighbors
+  }
+
+  isInGrid (row, col) {
+    return row >= 0 && row < this.numRows && col >= 0 && col < this.numCols
   }
 
   run () {

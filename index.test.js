@@ -7,7 +7,7 @@ describe('GameOfLife', () => {
   beforeEach(() => {
     const numRows = 4
     const numCols = 8
-    const numGenerations = 2
+    const numGenerations = 8
     game = new GameOfLife(numRows, numCols, numGenerations)
   })
 
